@@ -1,0 +1,24 @@
+SCR_ChimeraCharacter {
+ ID "520EC961A090B1EE"
+ components {
+  SCR_CharacterDamageManagerComponent "{55872AD7B4E959F2}" {
+   "Additional hit zones" {
+    SCR_CharacterResilienceHitZone Resilience {
+    }
+   }
+  }
+  ActionsManagerComponent "{520EA1D2F659CE02}" {
+   additionalActions {
+    UnnMed_SlapUserAction "{64F80D22E3EEF731}" {
+     ParentContextList {
+      "Head"
+     }
+     UIInfo UIInfo "{64F80D22DB431D57}" {
+      Name "#UnnMed-UserAction_Slap"
+     }
+     Duration 1
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,35 @@
+GameProject {
+ ID "UnnMedical"
+ GUID "64F4D48294F1832F"
+ TITLE "Unn Medical"
+ Dependencies {
+  "58D0FB3206B6F859"
+ }
+ Configurations {
+  GameProjectConfig PC {
+   WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
+    StringTables {
+     StringTableDefinition "{64F8133BEBD55684}" {
+      StringTableSource "{44E5FAC2C521A0B8}Language/UnnMedical_Localization.st"
+      Languages {
+       LanguageDefinition "{64F8133BD45244D6}" {
+        Code "en_us"
+        StringTableRuntime "{6EDC26443840D9CE}Language/UnnMedical_Localization.en_us.conf"
+       }
+      }
+     }
+    }
+   }
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}
