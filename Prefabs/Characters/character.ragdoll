@@ -1,0 +1,201 @@
+RagdollDef {
+ Object "{9F3AF591CD6DFE1A}Assets/Characters/Basebody/Basebody_Male_01.xob"
+ {
+  RagdollBone Hips {
+   Mass 0.85
+   Offset 0 0.074 0.004
+   Orientation -2.791 0 0
+   Geometries {
+    PhysicsModelGeometry "{5A68A802F0003823}" {
+     Collider "UCS_Buttocks"
+    }
+   }
+   Blocks {
+    "LeftLeg"
+    "RightLeg"
+   }
+   {
+    RagdollBone Spine3 {
+     Mass 0.85
+     Offset 0 0.267 0.016
+     Orientation -3.467 0 0
+     Geometries {
+      PhysicsModelGeometry "{5A8AB71FA1F99205}" {
+       Mass 0.3
+       Collider "UCX_Belly"
+      }
+      PhysicsModelGeometry "{5A8E86DE372ED119}" {
+       Mass 0.5
+       Collider "UCX_Chest"
+      }
+     }
+     Blocks {
+      "LeftLeg"
+      "RightLeg"
+     }
+     JointMinLimits -20 -15 -15
+     JointMaxLimits 60 15 15
+     JointStiffness 0.7
+     JointDamper 0.38
+     {
+      RagdollBone Head {
+       Mass 0.045
+       Offset 0 0.05 0
+       Orientation 0 -180 0
+       Geometries {
+        PhysicsModelGeometry "{5A689A59A1AE3320}" {
+         SurfaceProperties "{DA94EA1EF2914EB7}Common/Materials/Game/flesh.gamemat"
+         Collider "UCX_Head"
+        }
+       }
+       JointMinLimits -15 -40 -25
+       JointMaxLimits 35 40 25
+       JointStiffness 0.5
+       JointDamper 0.35
+      }
+      RagdollBone LeftArm {
+       Mass 0.15
+       Offset 0 0.143 0
+       Orientation 0 -89.807 0
+       Geometries {
+        PhysicsModelGeometry "{5A689A5904783C5D}" {
+         Collider "UCS_Arm_L"
+        }
+       }
+       JointAngles 0 0 44
+       JointMinLimits -90 -30 -60
+       JointMaxLimits 90 30 45
+       JointStiffness 0.45
+       JointDamper 0.42
+       {
+        RagdollBone LeftForeArm {
+         Mass 0.2
+         Offset 0.006 0.147 0.006
+         Orientation 3.339 -149.627 -0.831
+         Geometries {
+          PhysicsModelGeometry "{5A689A5BB564EF55}" {
+           Collider "UCS_Forearm_L"
+          }
+          PhysicsModelGeometry "{5A689A5BBE04EF9F}" {
+           Collider "UCX_Hand_L"
+          }
+         }
+         JointAngles 0 0 44
+         JointMinLimits -100 -5 -5
+         JointMaxLimits 15 5 5
+         JointStiffness 0.35
+         JointDamper 0.4
+        }
+       }
+      }
+      RagdollBone RightArm {
+       Mass 0.15
+       Offset 0 -0.143 0
+       Orientation 0 90.193 180
+       Geometries {
+        PhysicsModelGeometry "{5A689A5AE9A8DE0C}" {
+         Collider "UCS_Arm_R"
+        }
+       }
+       JointAngles 0 0 -44
+       JointMinLimits -90 -30 -25
+       JointMaxLimits 90 30 60
+       JointStiffness 0.45
+       JointDamper 0.42
+       {
+        RagdollBone RightForeArm {
+         Mass 0.2
+         Offset -0.006 -0.147 -0.006
+         Orientation -3.339 30.374 -179.168
+         Geometries {
+          PhysicsModelGeometry "{5A689A5B63BBCFEF}" {
+           Collider "UCS_Forearm_R"
+          }
+          PhysicsModelGeometry "{5A689A5B6D02E845}" {
+           Collider "UCX_Hand_R"
+          }
+         }
+         JointAngles 0 0 -44
+         JointMinLimits -100 -5 -5
+         JointMaxLimits 15 5 5
+         JointStiffness 0.35
+         JointDamper 0.4
+        }
+       }
+      }
+     }
+    }
+    RagdollBone LeftLeg {
+     Mass 0.35
+     Offset 0 0.208 0
+     Orientation 0 0.231 0
+     Geometries {
+      PhysicsModelGeometry "{5A689A5F4004DB0D}" {
+       Collider "UCS_Thigh_L"
+      }
+     }
+     Blocks {
+      "RightLeg"
+     }
+     JointMinLimits -15 -10 -35
+     JointMaxLimits 20 10 10
+     JointStiffness 0.65
+     JointDamper 0.45
+     {
+      RagdollBone LeftKnee {
+       Mass 0.25
+       Offset 0 0.204 0
+       Orientation 0 -0.01 0
+       Geometries {
+        PhysicsModelGeometry "{5A689A5B1C49C4D5}" {
+         LayerPreset "Building"
+         Collider "UCS_Calf_L"
+        }
+        PhysicsModelGeometry "{5A689A5B268956A3}" {
+         Collider "UCX_Foot_L"
+        }
+       }
+       JointMinLimits 0 -7 -5
+       JointMaxLimits 90 7 5
+       JointStiffness 0.5
+       JointDamper 0.45
+      }
+     }
+    }
+    RagdollBone RightLeg {
+     Mass 0.35
+     Offset 0 -0.208 0
+     Orientation 0 -179.769 180
+     Geometries {
+      PhysicsModelGeometry "{5A689A5FBDA7AB7C}" {
+       Collider "UCS_Thigh_R"
+      }
+     }
+     JointMinLimits -15 -10 -10
+     JointMaxLimits 20 10 35
+     JointStiffness 0.65
+     JointDamper 0.45
+     {
+      RagdollBone RightKnee {
+       Mass 0.25
+       Offset 0 -0.204 0
+       Orientation 0 179.99 -180
+       Geometries {
+        PhysicsModelGeometry "{5A689A5B2BE7C0DF}" {
+         Collider "UCS_Calf_R"
+        }
+        PhysicsModelGeometry "{5A689A5B37E49920}" {
+         Collider "UCX_Foot_R"
+        }
+       }
+       JointMinLimits 0 -7 -5
+       JointMaxLimits 90 7 5
+       JointStiffness 0.5
+       JointDamper 0.45
+      }
+     }
+    }
+   }
+  }
+ }
+}

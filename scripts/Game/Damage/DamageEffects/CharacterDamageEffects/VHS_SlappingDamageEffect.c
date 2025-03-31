@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-class UnnMed_SlappingDamageEffect: SCR_DotDamageEffect
+class VHS_SlappingDamageEffect: SCR_DotDamageEffect
 {
 	//------------------------------------------------------------------------------------------------
 	override bool HijackDamageEffect(SCR_ExtendedDamageManagerComponent dmgManager)

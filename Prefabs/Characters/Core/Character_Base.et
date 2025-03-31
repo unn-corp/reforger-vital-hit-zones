@@ -3,22 +3,60 @@ SCR_ChimeraCharacter {
  components {
   SCR_CharacterDamageManagerComponent "{55872AD7B4E959F2}" {
    "Additional hit zones" {
-    SCR_CharacterResilienceHitZone Resilience {
+    SCR_CharacterHitZone Chest {
+    }
+    VHS_VitalHitZone Heart {
+     ColliderNames {
+      "UCX_Chest"
+     }
+     ParentHZs {
+      ParentHitZone "{64FCD7CF808A50EC}" {
+       Parent "Health"
+       DamageMultiplier 0
+       HealingMultiplier 0
+      }
+      ParentHitZone "{64FD3E280A478BA7}" {
+       Parent "Resilience"
+       HealingMultiplier 0
+       Overkill 1
+      }
+     }
+     IgnoreExplosions 1
+     MaxHealth 15
+     CriticalDamage 0.25
+     "Kinetic multiplier" 12
+     m_fFullRegenerationTime 2000
+     m_fBleedingRateScale 40
+     m_aBleedingAreas {
+      LoadoutVestArea "{64FCD7FE4A9CC3A1}" {
+      }
+      LoadoutJacketArea "{64FCD7FE3BD3704C}" {
+      }
+     }
+     m_eHitZoneGroup UPPERTORSO
+     m_vHitZoneOffset -0.03 0.15 0.025
+     m_fHitZoneSize 0.045
     }
    }
   }
   ActionsManagerComponent "{520EA1D2F659CE02}" {
    additionalActions {
-    UnnMed_SlapUserAction "{64F80D22E3EEF731}" {
+    VHS_SlapUserAction "{64FCB41DB19EBA3B}" {
      ParentContextList {
       "Head"
      }
-     UIInfo UIInfo "{64F80D22DB431D57}" {
-      Name "#UnnMed-UserAction_Slap"
+     UIInfo UIInfo "{64FCB41D52123A80}" {
+      Name "#VHS-UserAction_Slap"
      }
      Duration 1
     }
    }
+  }
+  SCR_CharacterAnimationComponent "{520EA1D2F659C994}" {
+   Definition "{55BA23D026D8F0F9}Prefabs/Characters/character.ragdoll"
+   RagdollHipsMaxSpeed 25
+   RagdollHipsMaxSpin 60
+   m_fExplosionImpulseMultiplier 1150
   }
  }
 }

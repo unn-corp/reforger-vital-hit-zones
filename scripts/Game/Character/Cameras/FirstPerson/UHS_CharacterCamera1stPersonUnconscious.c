@@ -34,3 +34,4 @@ modded class CharacterCamera1stPersonUnconscious {
 			m_CharacterCameraHandler.AddShakeToToTransform(pOutResult.m_CameraTM, pOutResult.m_fFOV);
 	}
 }
+ 

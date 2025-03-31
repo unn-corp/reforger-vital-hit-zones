@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------------------------
 [BaseContainerProps()]
-class UnnMed_IsSlappableCondition : SCR_AvailableActionCondition
+class VHS_IsSlappableCondition : SCR_AvailableActionCondition
 {
 	//------------------------------------------------------------------------------------------------
 	//! Returns true if the release action is available

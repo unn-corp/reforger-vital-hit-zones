@@ -1,6 +1,6 @@
 //Stupid but fun, slap an incapacitated person to wake them up
 //------------------------------------------------------------------------------------------------
-class UnnMed_SlapUserAction : ScriptedUserAction
+class VHS_SlapUserAction : ScriptedUserAction
 {
 	//------------------------------------------------------------------------------------------------
 	override bool CanBeShownScript(IEntity user)
@@ -41,7 +41,7 @@ class UnnMed_SlapUserAction : ScriptedUserAction
 	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity)
 	{
 		ChimeraCharacter ownerChar = ChimeraCharacter.Cast(pOwnerEntity);
-		SCR_CharacterDamageManagerComponent.Cast(ownerChar.GetDamageManager()).UnnMed_DealResilienceDamage(-7, 2);
+		SCR_CharacterDamageManagerComponent.Cast(ownerChar.GetDamageManager()).VHS_DealResilienceDamage(-35, 1);
 	}
 	
 	//------------------------------------------------------------------------------------------------

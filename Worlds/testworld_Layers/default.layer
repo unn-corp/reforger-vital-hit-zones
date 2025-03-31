@@ -1,0 +1,59 @@
+SCR_ChimeraCharacter : "{37578B1666981FCE}Prefabs/Characters/Core/Character_Base.et" {
+ coords 128.339 1 145.815
+}
+GenericEntity : "{5E6CBF60621C39CD}Prefabs/Props/Military/Arsenal/AmmoBoxes/USSR/AmmoBoxArsenal_Ammunition_USSR.et" {
+ coords 125.582 1 146.269
+}
+$grp GenericEntity : "{C0F7DD85A86B2900}Prefabs/Weapons/Handguns/PM/Handgun_PM.et" {
+ {
+  coords 126.887 1 143.779
+ }
+ {
+  coords 126.638 1 143.737
+ }
+ {
+  coords 126.253 1 143.918
+ }
+ {
+  coords 127.269 1 143.78
+ }
+ {
+  coords 125.731 1 143.854
+ }
+ {
+  coords 126.31 1 144.764
+ }
+ {
+  coords 126.866 1 144.713
+ }
+ {
+  coords 125.756 1 145.186
+ }
+ {
+  coords 125.221 1 144.998
+ }
+ {
+  coords 127.632 1 144.669
+ }
+ {
+  coords 125.945 1 144.413
+ }
+ {
+  coords 127.87 1 144.028
+ }
+ {
+  coords 127.28 1 144.614
+ }
+ {
+  coords 125.124 1 144.436
+ }
+ {
+  coords 126.226 1 143.425
+ }
+ {
+  coords 125.562 1 143.492
+ }
+}
+GenericEntity : "{E74C02B60805F7C7}Prefabs/Props/Military/Arsenal/AmmoBoxes/USSR/AmmoBoxArsenal_Weapons_USSR.et" {
+ coords 126.865 1 145.55
+}

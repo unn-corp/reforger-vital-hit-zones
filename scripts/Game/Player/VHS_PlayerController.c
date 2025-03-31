@@ -17,6 +17,6 @@ modded class SCR_PlayerController : PlayerController
 		
 		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(to.FindComponent(SCR_CharacterDamageManagerComponent));
 		if (damageManager)
-			damageManager.UnnMed_Initialize();
+			damageManager.VHS_Initialize();
 	}
 }

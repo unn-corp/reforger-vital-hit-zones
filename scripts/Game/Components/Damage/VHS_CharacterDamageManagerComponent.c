@@ -1,55 +1,58 @@
 
 modded class SCR_CharacterDamageManagerComponent {
+
+	[Attribute(desc: "Define the vital hitzones")]
+	protected array<ref VHS_VitalHitZone> m_aVitalHitZones;
 	
 	// We only notify the replication system about changes of these members on initialization
 	// After init, each proxy is itself responsible for updating these members
 	// Having them as RplProp also ensures that JIPs receive the current state from the server
 	[RplProp()]
-	protected bool m_bUnnMed_Initialized = false;
+	protected bool m_bVHS_Initialized = false;
 	[RplProp()]
-	protected bool m_bUnnMed_HasCheatingDeath = true;
+	protected bool m_bVHS_HasCheatingDeath = true;
 	[RplProp()]
-	protected bool m_bUnnMed_CheatingDeathTriggered = false;
+	protected bool m_bVHS_CheatingDeathTriggered = false;
 	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Initialize Unn medical on a character damage manager (Called on the server)
-	void UnnMed_Initialize()
+	void VHS_Initialize()
 	{
-		if (m_bUnnMed_Initialized)
+		if (m_bVHS_Initialized)
 			return;
 				
-		UnnMed_EnableCheatingDeath(true);
+		VHS_EnableCheatingDeath(true);
 		// Damage calculations are done on all machines, so we have to broadcast the init
-		m_bUnnMed_Initialized = true;
+		m_bVHS_Initialized = true;
 		Replication.BumpMe();
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Returns true if Unn Medical has been initialized
-	bool UnnMed_IsInitialized()
+	bool VHS_IsInitialized()
 	{
-		return m_bUnnMed_Initialized;
+		return m_bVHS_Initialized;
 	}
 
 	//------------------------------------------------------------------------------------------------
 	//! Enable/disable random survive
-	void UnnMed_EnableCheatingDeath(bool enable)
+	void VHS_EnableCheatingDeath(bool enable)
 	{
-		m_bUnnMed_HasCheatingDeath = enable;
+		m_bVHS_HasCheatingDeath = enable;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Check if random survive is enabled
-	bool UnnMed_HasCheatingDeath()
+	bool VHS_HasCheatingDeath()
 	{
-		return m_bUnnMed_HasCheatingDeath;
+		return m_bVHS_HasCheatingDeath;
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Returns true if random survive is enabled for the given hit zone
-	bool UnnMed_HasCheatingDeathOnHitZone(HitZone hitZone)
+	bool VHS_HasCheatingDeathOnHitZone(HitZone hitZone)
 	{
-		if (!m_bUnnMed_HasCheatingDeath)
+		if (!m_bVHS_HasCheatingDeath)
 			return false;
 		
 		return (hitZone != m_pHeadHitZone);
@@ -57,19 +60,19 @@ modded class SCR_CharacterDamageManagerComponent {
 	
 	//------------------------------------------------------------------------------------------------
 	//! To be set true when random survive was used
-	void UnnMed_SetCheatingDeathTrigged(bool isTriggered)
+	void VHS_SetCheatingDeathTrigged(bool isTriggered)
 	{
-		m_bUnnMed_CheatingDeathTriggered = isTriggered;
+		m_bVHS_CheatingDeathTriggered = isTriggered;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Check if random survive was used
-	bool UnnMed_WasCheatingDeathTrigged()
+	bool VHS_WasCheatingDeathTrigged()
 	{
-		return m_bUnnMed_CheatingDeathTriggered;
+		return m_bVHS_CheatingDeathTriggered;
 	}
 	
-	void UnnMed_DealResilienceDamage(float amount, float duration) 
+	void VHS_DealResilienceDamage(float amount, float duration) 
 	{
 		SCR_CharacterResilienceHitZone hitZone = GetResilienceHitZone();
 		
@@ -81,13 +84,39 @@ modded class SCR_CharacterDamageManagerComponent {
 		Print("res: " + hitZone.GetHealthScaled().ToString());
 		#endif
 		
-		UnnMed_SlappingDamageEffect hitZoneSlapping = new UnnMed_SlappingDamageEffect();
+		VHS_SlappingDamageEffect hitZoneSlapping = new VHS_SlappingDamageEffect();
 		hitZoneSlapping.SetDPS(amount);
 		hitZoneSlapping.SetMaxDuration(duration);
 		hitZoneSlapping.SetDamageType(EDamageType.HEALING);
 		hitZoneSlapping.SetAffectedHitZone(hitZone);
 		hitZoneSlapping.SetInstigator(GetInstigator());
 		AddDamageEffect(hitZoneSlapping);
+	}
+	
+	override void AddBleedingEffectOnHitZone(notnull SCR_CharacterHitZone hitZone, int colliderDescriptorIndex = -1)
+	{
+		Print("BLEED CALLED");
+		// This code is handled on authority only
+		if (hitZone.IsProxy())
+			return;
+		
+		// In case bleeding is started outside of normal context, full health will prevent DOT. This block will circumvent this issue
+		float hitZoneDamageMultiplier = hitZone.GetHealthScaled();
+		float bleedingRate = hitZone.GetMaxBleedingRate() - hitZone.GetMaxBleedingRate() * hitZoneDamageMultiplier;
+		
+		Print("BLEED: " + bleedingRate.ToString());
+		
+		SCR_BleedingDamageEffect hitZoneBleeding = new SCR_BleedingDamageEffect();
+		if (colliderDescriptorIndex == -1)
+			colliderDescriptorIndex = Math.RandomInt(0, hitZone.GetNumColliderDescriptors() - 1);
+			
+		hitZoneBleeding.m_iColliderDescriptorIndex = colliderDescriptorIndex;
+		hitZoneBleeding.SetDPS(bleedingRate * GetBleedingScale());
+		hitZoneBleeding.SetMaxDuration(0);
+		hitZoneBleeding.SetDamageType(EDamageType.BLEEDING);
+		hitZoneBleeding.SetAffectedHitZone(hitZone);
+		hitZoneBleeding.SetInstigator(GetInstigator());
+		AddDamageEffect(hitZoneBleeding);
 	}
 	
 	/*-----------------------------------------------------------------------------------------------------------
