@@ -1,5 +1,8 @@
 class VHS_VitalHitZone : SCR_CharacterHitZone {
 	
+	//uncomment to debug hitzone placement
+	//#define VHS_Debug
+	
 	// Define the vital hitzone as an offset from the bone/collider instead of a fixed position
 	[Attribute(desc: "HitZone Offset from Bone", defvalue: "0 0.1 0.05")]
 	protected vector m_vHitZoneOffset;
@@ -7,11 +10,14 @@ class VHS_VitalHitZone : SCR_CharacterHitZone {
 	[Attribute(desc: "HitZone Radius", defvalue: "0.05")]
 	protected float m_fHitZoneSize;
 	
+	[Attribute(desc: "Only set this for a bleed that cannot be stopped", defvalue: "true")]
+	protected bool m_bPlayerIsDoomedOnVitalhit;
+	
 	protected SCR_CharacterDamageManagerComponent m_pVHS_DamageManager;
 	protected IEntity m_Owner;
 	protected int m_ColliderDescriptorIndex;
 	
-	#ifdef WORKBENCH
+	#ifdef VHS_Debug
 	ref array<ref Shape> m_aDbgSamplePositionsShapes;
 	#endif
 	
@@ -24,12 +30,16 @@ class VHS_VitalHitZone : SCR_CharacterHitZone {
 		array<int> colliderIDs = {};
 		GetColliderIDs(colliderIDs);
 		
-		m_ColliderDescriptorIndex = GetColliderDescriptorIndex(colliderIDs[0]);
+		if(!colliderIDs.IsEmpty())
+			m_ColliderDescriptorIndex = GetColliderDescriptorIndex(colliderIDs[0]);
 		
-		#ifdef WORKBENCH
+		#ifdef VHS_Debug
 		m_aDbgSamplePositionsShapes = {};
 		
-		// Visualize current bone/collider position and the vital zone in workbench
+		if(colliderIDs.IsEmpty())
+			return;
+		
+		// Visualize current bone/collider position and the vital zone in VHS_Debug
 		vector colliderTransformLocalSpace[4];
 		int boneIndex;
 		int boneNode;
@@ -37,7 +47,7 @@ class VHS_VitalHitZone : SCR_CharacterHitZone {
 		if(TryGetColliderDescription(m_Owner, m_ColliderDescriptorIndex, colliderTransformLocalSpace, boneIndex, boneNode)) 
 		{
 			vector vitalZonePos = CalculateVitalZonePosition(colliderTransformLocalSpace);
-			Debug_DrawSphereAtPos(colliderTransformLocalSpace[3], m_aDbgSamplePositionsShapes, COLOR_BLUE, m_fHitZoneSize);
+			//Debug_DrawSphereAtPos(colliderTransformLocalSpace[3], m_aDbgSamplePositionsShapes, COLOR_BLUE, 0.02);
 			Debug_DrawSphereAtPos(vitalZonePos, m_aDbgSamplePositionsShapes, COLOR_RED, m_fHitZoneSize);
 		}
 		#endif
@@ -74,7 +84,7 @@ class VHS_VitalHitZone : SCR_CharacterHitZone {
 			return 0;
 		}
 		
-		#ifdef WORKBENCH
+		#ifdef VHS_Debug
 		Print("dt:" + damageContext.damageType);
 		Print("dv:" + damageContext.damageValue);
 			
@@ -95,10 +105,14 @@ class VHS_VitalHitZone : SCR_CharacterHitZone {
 			return 0;
 		}
 		
-		#ifdef WORKBENCH
+		#ifdef VHS_Debug
 		Print("VITAL HIT!");
 		Print("Damage: " + effectiveDamage.ToString());
 		#endif
+		
+		if(m_bPlayerIsDoomedOnVitalhit) {
+			m_pVHS_DamageManager.VHS_SetPlayerDoomed(true);
+		}
 		
 		return effectiveDamage;
 	}
@@ -108,10 +122,13 @@ class VHS_VitalHitZone : SCR_CharacterHitZone {
 	 */
 	protected bool CheckBulletHitsVitalZone(vector bulletPos, vector bulletDir, vector spherePos, float sphereRadius)
 	{
+		#ifdef VHS_Debug_AlwaysHit
+		return true;
+		#endif
 		// game engine calls ComputeEffectiveDamage with zero direction when calculating if the hit should cause a bleed.
 		// because we already responded once with a non zero computed damage value, we know we're getting called again with zero direction
 		// so just say it is a vital hit.
-	    if (bulletDir == vector.Zero)
+	    if (bulletDir == vector.Zero) 
 	        return true;
 	
 	    // is going toward or away from?
@@ -125,7 +142,7 @@ class VHS_VitalHitZone : SCR_CharacterHitZone {
 	}
 	
 	
-	#ifdef WORKBENCH
+	#ifdef VHS_Debug
 	protected void Debug_DrawSphereAtPos(vector v, array<ref Shape> dbgShapes, int color = COLOR_BLUE, float size = 0.03, ShapeFlags shapeFlags = ShapeFlags.VISIBLE)
 	{
 		shapeFlags = ShapeFlags.NOOUTLINE | ShapeFlags.NOZBUFFER | shapeFlags;

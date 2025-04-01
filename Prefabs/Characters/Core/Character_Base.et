@@ -5,7 +5,7 @@ SCR_ChimeraCharacter {
    "Additional hit zones" {
     SCR_CharacterHitZone Chest {
     }
-    VHS_VitalHitZone Heart {
+    VHS_VitalHitZone VHS_Heart {
      ColliderNames {
       "UCX_Chest"
      }
@@ -17,6 +17,7 @@ SCR_ChimeraCharacter {
       }
       ParentHitZone "{64FD3E280A478BA7}" {
        Parent "Resilience"
+       DamageMultiplier 10
        HealingMultiplier 0
        Overkill 1
       }
@@ -24,18 +25,218 @@ SCR_ChimeraCharacter {
      IgnoreExplosions 1
      MaxHealth 15
      CriticalDamage 0.25
+     "Collision multiplier" 0
+     "Melee multiplier" 12
      "Kinetic multiplier" 12
-     m_fFullRegenerationTime 2000
-     m_fBleedingRateScale 40
+     "Fragmentation multiplier" 12
+     "Explosive multiplier" 0
+     "Incendiary multiplier" 0
+     "Fire multiplier" 0
+     "DamageState threshold" {
+      0.6
+     }
+     m_fFullRegenerationTime 0
+     m_fBleedingRateScale 30
      m_aBleedingAreas {
       LoadoutVestArea "{64FCD7FE4A9CC3A1}" {
       }
       LoadoutJacketArea "{64FCD7FE3BD3704C}" {
       }
      }
-     m_eHitZoneGroup UPPERTORSO
      m_vHitZoneOffset -0.03 0.15 0.025
-     m_fHitZoneSize 0.045
+     m_fHitZoneSize 0.06
+    }
+    VHS_VitalHitZone VHS_LFemoral {
+     ColliderNames {
+      "UCS_Thigh_L"
+     }
+     ParentHZs {
+      ParentHitZone "{64FF3C85F1CC66C5}" {
+       Parent "Resilience"
+       DamageMultiplier 0.25
+       HealingMultiplier 0
+       Overkill 1
+      }
+     }
+     IgnoreExplosions 1
+     MaxHealth 12
+     CriticalDamage 0.25
+     "Collision multiplier" 0
+     "Melee multiplier" 0
+     "Kinetic multiplier" 7
+     "Fragmentation multiplier" 7
+     "Explosive multiplier" 0
+     "Incendiary multiplier" 0
+     "Fire multiplier" 0
+     "DamageState threshold" {
+      0.6
+     }
+     m_fFireMultiplier 0
+     m_fFullRegenerationTime 1200
+     m_fBleedingRateScale 18
+     m_aBleedingAreas {
+      LoadoutPantsArea "{64FF64749A54415B}" {
+      }
+     }
+     m_eHitZoneGroup LEFTLEG
+     m_eBandageAnimationBodyPart LeftLeg
+     m_vHitZoneOffset -0.04 0.08 0
+     m_fHitZoneSize 0.035
+     m_bPlayerIsDoomedOnVitalhit 0
+    }
+    VHS_VitalHitZone VHS_RFemoral {
+     ColliderNames {
+      "UCS_Thigh_R"
+     }
+     ParentHZs {
+      ParentHitZone "{64FF3C856FAB6857}" {
+       Parent "Resilience"
+       DamageMultiplier 0.25
+       HealingMultiplier 0
+       Overkill 1
+      }
+     }
+     IgnoreExplosions 1
+     MaxHealth 12
+     CriticalDamage 0.25
+     "Collision multiplier" 0
+     "Melee multiplier" 0
+     "Kinetic multiplier" 7
+     "Fragmentation multiplier" 7
+     "Explosive multiplier" 0
+     "Incendiary multiplier" 0
+     "Fire multiplier" 0
+     "DamageState threshold" {
+      0.6
+     }
+     m_fFireMultiplier 0
+     m_fFullRegenerationTime 1200
+     m_fBleedingRateScale 18
+     m_aBleedingAreas {
+      LoadoutPantsArea "{64FF64749C3775E3}" {
+      }
+     }
+     m_eHitZoneGroup RIGHTLEG
+     m_eBandageAnimationBodyPart RightLeg
+     m_vHitZoneOffset 0.055 -0.075 0
+     m_fHitZoneSize 0.035
+     m_bPlayerIsDoomedOnVitalhit 0
+    }
+    VHS_VitalHitZone VHS_LAxillary {
+     ColliderNames {
+      "UCS_Arm_L"
+     }
+     ParentHZs {
+      ParentHitZone "{64FF3C874DA14BDB}" {
+       Parent "Resilience"
+       DamageMultiplier 0.15
+       HealingMultiplier 0
+       Overkill 1
+      }
+     }
+     IgnoreExplosions 1
+     MaxHealth 10
+     CriticalDamage 0.25
+     "Collision multiplier" 0
+     "Melee multiplier" 0
+     "Kinetic multiplier" 5
+     "Fragmentation multiplier" 5
+     "Explosive multiplier" 0
+     "Incendiary multiplier" 0
+     "Fire multiplier" 0
+     "DamageState threshold" {
+      0.6
+     }
+     m_fFireMultiplier 0
+     m_fFullRegenerationTime 1200
+     m_fBleedingRateScale 12
+     m_aBleedingAreas {
+      LoadoutVestArea "{64FF6474A31553BC}" {
+      }
+      LoadoutJacketArea "{64FF6474ADE96C2D}" {
+      }
+     }
+     m_eHitZoneGroup LEFTARM
+     m_eBandageAnimationBodyPart LeftHand
+     m_vHitZoneOffset 0.02 0.02 0.02
+     m_fHitZoneSize 0.035
+     m_bPlayerIsDoomedOnVitalhit 0
+    }
+    VHS_VitalHitZone VHS_RAxillary {
+     ColliderNames {
+      "UCS_Arm_R"
+     }
+     ParentHZs {
+      ParentHitZone "{64FF3C87345AB012}" {
+       Parent "Resilience"
+       DamageMultiplier 0.15
+       HealingMultiplier 0
+       Overkill 1
+      }
+     }
+     IgnoreExplosions 1
+     MaxHealth 10
+     CriticalDamage 0.25
+     "Collision multiplier" 0
+     "Melee multiplier" 0
+     "Kinetic multiplier" 5
+     "Fragmentation multiplier" 5
+     "Explosive multiplier" 0
+     "Incendiary multiplier" 0
+     "Fire multiplier" 0
+     "DamageState threshold" {
+      0.6
+     }
+     m_fFireMultiplier 0
+     m_fFullRegenerationTime 1200
+     m_fBleedingRateScale 12
+     m_aBleedingAreas {
+      LoadoutVestArea "{64FF6474B261DE67}" {
+      }
+      LoadoutJacketArea "{64FF6474BC9DBD5A}" {
+      }
+     }
+     m_eHitZoneGroup RIGHTARM
+     m_eBandageAnimationBodyPart RightHand
+     m_vHitZoneOffset 0.02 -0.02 0.02
+     m_fHitZoneSize 0.035
+     m_bPlayerIsDoomedOnVitalhit 0
+    }
+    VHS_VitalHitZone VHS_Neck {
+     ColliderNames {
+      "UCS_Neck"
+     }
+     ParentHZs {
+      ParentHitZone "{64FF3C800377382C}" {
+       Parent "Resilience"
+       HealingMultiplier 0
+       Overkill 1
+      }
+     }
+     IgnoreExplosions 1
+     MaxHealth 12
+     CriticalDamage 0.25
+     "Collision multiplier" 0
+     "Melee multiplier" 9
+     "Kinetic multiplier" 9
+     "Fragmentation multiplier" 9
+     "Explosive multiplier" 0
+     "Incendiary multiplier" 0
+     "Fire multiplier" 0
+     "DamageState threshold" {
+      0.6
+     }
+     m_fFireMultiplier 0
+     m_fFullRegenerationTime 1200
+     m_fBleedingRateScale 20
+     m_aBleedingAreas {
+      LoadoutVestArea "{64FF6474D2BB294B}" {
+      }
+      LoadoutJacketArea "{64FF6474DEDB3C49}" {
+      }
+     }
+     m_vHitZoneOffset 0 0.025 -0.005
+     m_fHitZoneSize 0.06
     }
    }
   }
@@ -54,7 +255,6 @@ SCR_ChimeraCharacter {
   }
   SCR_CharacterAnimationComponent "{520EA1D2F659C994}" {
    Definition "{55BA23D026D8F0F9}Prefabs/Characters/character.ragdoll"
-   RagdollHipsMaxSpeed 25
    RagdollHipsMaxSpin 60
    m_fExplosionImpulseMultiplier 1150
   }

@@ -13,6 +13,8 @@ modded class SCR_CharacterDamageManagerComponent {
 	protected bool m_bVHS_HasCheatingDeath = true;
 	[RplProp()]
 	protected bool m_bVHS_CheatingDeathTriggered = false;
+	[RplProp()]
+	protected bool m_bVHS_IsPlayerDoomed = false;
 	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Initialize Unn medical on a character damage manager (Called on the server)
@@ -32,6 +34,16 @@ modded class SCR_CharacterDamageManagerComponent {
 	bool VHS_IsInitialized()
 	{
 		return m_bVHS_Initialized;
+	}
+	
+	void VHS_SetPlayerDoomed(bool doomed) 
+	{
+		m_bVHS_IsPlayerDoomed = doomed;
+	}
+	
+	bool VHS_IsPlayerDoomed()
+	{
+		return m_bVHS_IsPlayerDoomed;
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -80,7 +92,7 @@ modded class SCR_CharacterDamageManagerComponent {
 		if (hitZone.IsProxy())
 			return;
 		
-		#ifdef WORKBENCH
+		#ifdef VHS_Debug
 		Print("res: " + hitZone.GetHealthScaled().ToString());
 		#endif
 		
@@ -92,10 +104,14 @@ modded class SCR_CharacterDamageManagerComponent {
 		hitZoneSlapping.SetInstigator(GetInstigator());
 		AddDamageEffect(hitZoneSlapping);
 	}
-	
+
+	//-----------------------------------------------------------------------------------------------------------
+	/*! Add bleeding effect to hitzone
+	\param hitZone Hitzone to get bleeding rate from and add effect to
+	\param colliderDescriptorIndex Collider descriptor index
+	*/
 	override void AddBleedingEffectOnHitZone(notnull SCR_CharacterHitZone hitZone, int colliderDescriptorIndex = -1)
 	{
-		Print("BLEED CALLED");
 		// This code is handled on authority only
 		if (hitZone.IsProxy())
 			return;
@@ -104,14 +120,16 @@ modded class SCR_CharacterDamageManagerComponent {
 		float hitZoneDamageMultiplier = hitZone.GetHealthScaled();
 		float bleedingRate = hitZone.GetMaxBleedingRate() - hitZone.GetMaxBleedingRate() * hitZoneDamageMultiplier;
 		
-		Print("BLEED: " + bleedingRate.ToString());
-		
+		//ignore scenario/GM scaling multipliers for doomed bleeds
+		if(!m_bVHS_IsPlayerDoomed)
+			bleedingRate *= GetBleedingScale();
+
 		SCR_BleedingDamageEffect hitZoneBleeding = new SCR_BleedingDamageEffect();
 		if (colliderDescriptorIndex == -1)
 			colliderDescriptorIndex = Math.RandomInt(0, hitZone.GetNumColliderDescriptors() - 1);
 			
 		hitZoneBleeding.m_iColliderDescriptorIndex = colliderDescriptorIndex;
-		hitZoneBleeding.SetDPS(bleedingRate * GetBleedingScale());
+		hitZoneBleeding.SetDPS(bleedingRate);
 		hitZoneBleeding.SetMaxDuration(0);
 		hitZoneBleeding.SetDamageType(EDamageType.BLEEDING);
 		hitZoneBleeding.SetAffectedHitZone(hitZone);

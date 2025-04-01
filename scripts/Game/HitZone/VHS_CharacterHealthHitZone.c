@@ -1,5 +1,8 @@
 modded class SCR_CharacterHealthHitZone : SCR_HitZone {
 	
+	//uncomment to debug hitzone placement
+	//#define VHS_Debug
+	
 	protected const float VHS_MIN_HEALTH 				= 1;
 	protected const float VHS_OVERKILL_THRESHOLD 		= 25;
 	protected const float VHS_SEVERE_TRAUMA_THRESHOLD	= 45;
@@ -54,10 +57,9 @@ modded class SCR_CharacterHealthHitZone : SCR_HitZone {
 		    return effectiveDamage;
 		}
 		
-		
 	    SCR_CharacterHitZone hitZone = SCR_CharacterHitZone.Cast(damageContext.struckHitZone);
 	    
-		#ifdef WORKBENCH
+		#ifdef VHS_Debug
 		Print("-");
 		Print("health:            " +  health.ToString());
 		Print("effectiveDamage:   " +  effectiveDamage.ToString());
@@ -74,6 +76,10 @@ modded class SCR_CharacterHealthHitZone : SCR_HitZone {
 	    if (!hitZone)
 			return effectiveDamage;
 		
+		//they're going to die in a few seconds, let them enjoy it :P
+		if(m_pVHS_DamageManager.VHS_IsPlayerDoomed())
+			return 0;
+		
 		int hitZoneGroup = hitZone.GetHitZoneGroup();
 		bool isCentreMass = hitZoneGroup == ECharacterHitZoneGroup.LOWERTORSO || 
 			 				hitZoneGroup == ECharacterHitZoneGroup.UPPERTORSO ||
@@ -82,7 +88,7 @@ modded class SCR_CharacterHealthHitZone : SCR_HitZone {
 	    // If damage is too large, and hits a vital zone, character dies regardless
 	    if (effectiveDamage > VHS_SEVERE_TRAUMA_THRESHOLD && isCentreMass) 
 		{
-			#ifdef WORKBENCH
+			#ifdef VHS_Debug
 			Print("Killed by Severe Trauma to " + hitZone.GetName());
 	    	Print(" ");
 			#endif
@@ -93,7 +99,7 @@ modded class SCR_CharacterHealthHitZone : SCR_HitZone {
 	    float overkillDamage = Math.AbsFloat(healthAfterDamage);
 	    float normalizedOverkill = overkillDamage / VHS_OVERKILL_THRESHOLD;
 		
-		#ifdef WORKBENCH
+		#ifdef VHS_Debug
 		Print("overkillDamage:    " +  overkillDamage.ToString());
 		Print("normalizedOverkill:" +  normalizedOverkill.ToString());
 		#endif
@@ -101,7 +107,7 @@ modded class SCR_CharacterHealthHitZone : SCR_HitZone {
 	    // If overkill exceeds threshold, character dies
 	    if (overkillDamage >= VHS_OVERKILL_THRESHOLD) 
 		{
-			#ifdef WORKBENCH
+			#ifdef VHS_Debug
 			Print("Killed by overkill damage");
 	    	Print(" ");
 			#endif
@@ -114,7 +120,7 @@ modded class SCR_CharacterHealthHitZone : SCR_HitZone {
 			(bleedingHitZones == null ||  !bleedingHitZones.Contains(hitZone))
 		   ) 
 		{
-			#ifdef WORKBENCH
+			#ifdef VHS_Debug
 			Print("Adding bleed to "+ hitZone.GetName());
     		Print(" ");
 			#endif
@@ -124,7 +130,7 @@ modded class SCR_CharacterHealthHitZone : SCR_HitZone {
 		if (isCentreMass) {
 			float resilienceScale = Math.Pow(normalizedOverkill, VHS_UNCONSCIOUS_CURVE);
 			float resilienceTime = VHS_MIN_RESILIENCE_DRAIN_TIME + (resilienceScale * (VHS_MAX_RESILIENCE_DRAIN_TIME - VHS_MIN_RESILIENCE_DRAIN_TIME));
-			#ifdef WORKBENCH
+			#ifdef VHS_Debug
 			Print("Adding resilience drain for " + resilienceTime.ToString());
     		Print(" ");
 			#endif
@@ -143,7 +149,7 @@ modded class SCR_CharacterHealthHitZone : SCR_HitZone {
 	    float maxHealth = GetMaxHealth();
 	    float healthToRecover = maxHealth * (recoveryPercent / 100.0);
 	    
-		#ifdef WORKBENCH
+		#ifdef VHS_Debug
 		Print("recoveryScale:     " +  recoveryScale.ToString());
 		Print("recoveryPercent:   " +  recoveryPercent.ToString());
 	    Print(" ");

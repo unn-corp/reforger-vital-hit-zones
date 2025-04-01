@@ -33,9 +33,9 @@ RagdollDef {
       "LeftLeg"
       "RightLeg"
      }
-     JointMinLimits -20 -15 -15
-     JointMaxLimits 60 15 15
-     JointStiffness 0.7
+     JointMinLimits -15 -10 -10
+     JointMaxLimits 55 10 10
+     JointStiffness 1.7
      JointDamper 0.38
      {
       RagdollBone Head {
@@ -48,9 +48,9 @@ RagdollDef {
          Collider "UCX_Head"
         }
        }
-       JointMinLimits -15 -40 -25
-       JointMaxLimits 35 40 25
-       JointStiffness 0.5
+       JointMinLimits -15 -35 -20
+       JointMaxLimits 35 35 20
+       JointStiffness 1.5
        JointDamper 0.35
       }
       RagdollBone LeftArm {
@@ -63,9 +63,9 @@ RagdollDef {
         }
        }
        JointAngles 0 0 44
-       JointMinLimits -90 -30 -60
-       JointMaxLimits 90 30 45
-       JointStiffness 0.45
+       JointMinLimits -90 -20 -60
+       JointMaxLimits 90 20 45
+       JointStiffness 1.45
        JointDamper 0.42
        {
         RagdollBone LeftForeArm {
@@ -81,9 +81,9 @@ RagdollDef {
           }
          }
          JointAngles 0 0 44
-         JointMinLimits -100 -5 -5
-         JointMaxLimits 15 5 5
-         JointStiffness 0.35
+         JointMinLimits -100 -3 -3
+         JointMaxLimits 15 3 3
+         JointStiffness 1.35
          JointDamper 0.4
         }
        }
@@ -98,9 +98,9 @@ RagdollDef {
         }
        }
        JointAngles 0 0 -44
-       JointMinLimits -90 -30 -25
-       JointMaxLimits 90 30 60
-       JointStiffness 0.45
+       JointMinLimits -90 -20 -25
+       JointMaxLimits 90 20 60
+       JointStiffness 1.45
        JointDamper 0.42
        {
         RagdollBone RightForeArm {
@@ -116,9 +116,9 @@ RagdollDef {
           }
          }
          JointAngles 0 0 -44
-         JointMinLimits -100 -5 -5
-         JointMaxLimits 15 5 5
-         JointStiffness 0.35
+         JointMinLimits -100 -3 -3
+         JointMaxLimits 15 3 3
+         JointStiffness 1.35
          JointDamper 0.4
         }
        }
@@ -137,9 +137,9 @@ RagdollDef {
      Blocks {
       "RightLeg"
      }
-     JointMinLimits -15 -10 -35
-     JointMaxLimits 20 10 10
-     JointStiffness 0.65
+     JointMinLimits -15 -5 -35
+     JointMaxLimits 20 5 10
+     JointStiffness 1.65
      JointDamper 0.45
      {
       RagdollBone LeftKnee {
@@ -155,9 +155,9 @@ RagdollDef {
          Collider "UCX_Foot_L"
         }
        }
-       JointMinLimits 0 -7 -5
-       JointMaxLimits 90 7 5
-       JointStiffness 0.5
+       JointMinLimits 0 -3 -2
+       JointMaxLimits 90 3 2
+       JointStiffness 1.5
        JointDamper 0.45
       }
      }
@@ -171,9 +171,9 @@ RagdollDef {
        Collider "UCS_Thigh_R"
       }
      }
-     JointMinLimits -15 -10 -10
-     JointMaxLimits 20 10 35
-     JointStiffness 0.65
+     JointMinLimits -15 -5 -10
+     JointMaxLimits 20 5 35
+     JointStiffness 1.65
      JointDamper 0.45
      {
       RagdollBone RightKnee {
@@ -188,9 +188,9 @@ RagdollDef {
          Collider "UCX_Foot_R"
         }
        }
-       JointMinLimits 0 -7 -5
-       JointMaxLimits 90 7 5
-       JointStiffness 0.5
+       JointMinLimits 0 -3 -2
+       JointMaxLimits 90 3 2
+       JointStiffness 1.5
        JointDamper 0.45
       }
      }
