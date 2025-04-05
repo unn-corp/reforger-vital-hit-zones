@@ -43,8 +43,8 @@ SCR_ChimeraCharacter {
       LoadoutJacketArea "{64FCD7FE3BD3704C}" {
       }
      }
-     m_vHitZoneOffset -0.03 0.15 0.025
-     m_fHitZoneSize 0.06
+     m_vHitZoneOffset -0.03 0.15 0.01
+     m_fHitZoneSize 0.07
     }
     VHS_VitalHitZone VHS_LFemoral {
      ColliderNames {
@@ -80,8 +80,8 @@ SCR_ChimeraCharacter {
      }
      m_eHitZoneGroup LEFTLEG
      m_eBandageAnimationBodyPart LeftLeg
-     m_vHitZoneOffset -0.04 0.08 0
-     m_fHitZoneSize 0.035
+     m_vHitZoneOffset -0.025 0.08 0
+     m_fHitZoneSize 0.065
      m_bPlayerIsDoomedOnVitalhit 0
     }
     VHS_VitalHitZone VHS_RFemoral {
@@ -118,8 +118,8 @@ SCR_ChimeraCharacter {
      }
      m_eHitZoneGroup RIGHTLEG
      m_eBandageAnimationBodyPart RightLeg
-     m_vHitZoneOffset 0.055 -0.075 0
-     m_fHitZoneSize 0.035
+     m_vHitZoneOffset 0.037 -0.075 0
+     m_fHitZoneSize 0.065
      m_bPlayerIsDoomedOnVitalhit 0
     }
     VHS_VitalHitZone VHS_LAxillary {
@@ -159,7 +159,6 @@ SCR_ChimeraCharacter {
      m_eHitZoneGroup LEFTARM
      m_eBandageAnimationBodyPart LeftHand
      m_vHitZoneOffset 0.02 0.02 0.02
-     m_fHitZoneSize 0.035
      m_bPlayerIsDoomedOnVitalhit 0
     }
     VHS_VitalHitZone VHS_RAxillary {
@@ -199,7 +198,6 @@ SCR_ChimeraCharacter {
      m_eHitZoneGroup RIGHTARM
      m_eBandageAnimationBodyPart RightHand
      m_vHitZoneOffset 0.02 -0.02 0.02
-     m_fHitZoneSize 0.035
      m_bPlayerIsDoomedOnVitalhit 0
     }
     VHS_VitalHitZone VHS_Neck {

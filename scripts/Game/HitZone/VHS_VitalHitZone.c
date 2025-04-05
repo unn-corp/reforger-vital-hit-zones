@@ -110,7 +110,7 @@ class VHS_VitalHitZone : SCR_CharacterHitZone {
 		Print("Damage: " + effectiveDamage.ToString());
 		#endif
 		
-		if(m_bPlayerIsDoomedOnVitalhit) {
+		if(effectiveDamage > GetCriticalDamageThreshold() && m_bPlayerIsDoomedOnVitalhit) {
 			m_pVHS_DamageManager.VHS_SetPlayerDoomed(true);
 		}
 		
